@@ -82,8 +82,21 @@ def getList(l):
     
     return crops
 
-@app.get('/')
 def main(state, district):
+    state = state.upper()
+    
+    (N, P, K) = getNPK(state)
+    
+    (temperature, humidity) = getWeather(district)
+    
+    ph = getPH(state)
+    rainfall = getRainfall(district)
+    
+    predict_data = [[N, P, K, temperature, humidity, ph, rainfall]]
+    return str(getList(predict_data))
+
+@app.get('/')
+def index(state, district):
     state = state.upper()
     
     (N, P, K) = getNPK(state)
