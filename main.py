@@ -19,6 +19,35 @@ result = model.predict(predict_data)
 accuracy = accuracy_score(dataset.iloc[0:1, 7].values, result)
 print(accuracy)
 
+df = pd.read_csv('Crop_recommendation.csv')
+
+# give a list of crops
+crops = df['label'].unique()
+
+# segregate similar crops according to paramaters
+# N, P, K, temperature, humidity, ph, rainfall
+# if the parameters are in the range of the crop, then it is a similar crop
+# get avg N, P, K, temperature, humidity, ph, rainfall for each crop
+avg = {}
+for crop in crops:
+    avg[crop] = df[df['label'] == crop].mean()
+
+similar_crops = {}
+for crop in crops:
+    similar_crops[crop] = []
+    
+    # if the combined value of N, P, K, temperature, humidity, ph, rainfall is in the range of the crop, then it is a similar crop
+    for crop2 in crops:
+        if crop2 == crop:
+            continue
+        if 0.9 * (avg[crop]['N'] + avg[crop]['P'] + avg[crop]['K'] + avg[crop]['temperature'] + avg[crop]['humidity'] + avg[crop]['ph'] + avg[crop]['rainfall']) <= (avg[crop2]['N'] + avg[crop2]['P'] + avg[crop2]['K'] + avg[crop2]['temperature'] + avg[crop2]['humidity'] + avg[crop2]['ph'] + avg[crop2]['rainfall']) <= 1.1 * (avg[crop]['N'] + avg[crop]['P'] + avg[crop]['K'] + avg[crop]['temperature'] + avg[crop]['humidity'] + avg[crop]['ph'] + avg[crop]['rainfall']):
+            similarity = abs(1 - (avg[crop2]['N'] + avg[crop2]['P'] + avg[crop2]['K'] + avg[crop2]['temperature'] + avg[crop2]['humidity'] + avg[crop2]['ph'] + avg[crop2]['rainfall']) / (avg[crop]['N'] + avg[crop]['P'] + avg[crop]['K'] + avg[crop]['temperature'] + avg[crop]['humidity'] + avg[crop]['ph'] + avg[crop]['rainfall']))
+            similar_crops[crop].append((crop2, similarity))
+                                        
+# order the similar crops according to similarity
+for crop in crops:
+    similar_crops[crop] = sorted(similar_crops[crop], key=lambda x: x[1])
+
 def map_state_to_soil(state):
     state_wise_soil = pd.read_csv('soil/npk.csv')
     for i in range(0, len(state_wise_soil)):
@@ -79,8 +108,17 @@ def getList(l):
         for j in range(0, len(l[i])):
             l[i][j] = float(l[i][j])
     crops = model.predict(l)
+    crop = crops[0]
     
-    return crops
+    result = []
+    result.append(crop)
+    similar_crops_ = [x[0] for x in similar_crops[crop]]
+    
+    for k in similar_crops_:
+        result.append(k)
+    
+    return result
+    
 
 def main(state, district):
     state = state.upper()
