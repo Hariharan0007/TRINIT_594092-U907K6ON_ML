@@ -1,1 +1,2 @@
 # TRINIT_594092-U907K6ON_ML
+The initial model uses the lightgbm library to train a model on the data. It is a gradient boosting model that uses decision trees as the base learners and provides a fast and accurate way to train a model. The model is 'Crop_recommendation.csv' data.
