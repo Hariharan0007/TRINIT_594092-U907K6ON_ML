@@ -3,6 +3,9 @@ import pandas as pd
 from sklearn.metrics import accuracy_score
 import requests
 import datetime
+import fastapi
+
+app = fastapi.FastAPI()
 
 api_key = 'a41cf401d26849f7bf0133021231102'
 
@@ -78,7 +81,8 @@ def getList(l):
     crops = model.predict(l)
     
     return crops
-    
+
+@app.get('/')
 def main(state, district):
     state = state.upper()
     
@@ -92,4 +96,4 @@ def main(state, district):
     predict_data = [[N, P, K, temperature, humidity, ph, rainfall]]
     return str(getList(predict_data))
     
-print(main('Tamil Nadu', 'Coimbatore')) # mothbeans
+print(main('Tamil Nadu', 'Coimbatore'))
