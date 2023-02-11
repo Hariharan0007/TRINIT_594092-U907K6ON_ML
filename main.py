@@ -92,7 +92,7 @@ def getRainfall(district):
     rainfall_data = pd.read_csv('rainfall/district_rainfall.csv')
     for i in range(0, len(rainfall_data)):
         if rainfall_data.iloc[i, 1] == district.upper():
-            return rainfall_data.iloc[i, month+2]
+            return rainfall_data.iloc[i, 14]
             
     return 100
 
@@ -107,6 +107,7 @@ def getList(l):
     for i in range(0, len(l)):
         for j in range(0, len(l[i])):
             l[i][j] = float(l[i][j])
+        l[i][6] /= 12
     crops = model.predict(l)
     crop = crops[0]
     
