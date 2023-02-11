@@ -63,7 +63,7 @@ def getRainfall(district):
     rainfall_data = pd.read_csv('rainfall/district_rainfall.csv')
     for i in range(0, len(rainfall_data)):
         if rainfall_data.iloc[i, 1] == district.upper():
-            return float(rainfall_data.iloc[i, (seasons.index(season)+15)]) / float(rainfall(seasons.index(season)))
+            return rainfall_data.iloc[i, month+2]
             
     return 100
 
