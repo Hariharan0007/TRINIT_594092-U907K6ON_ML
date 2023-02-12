@@ -23,3 +23,6 @@ The initial model uses the lightgbm library to train a model on the data. It is 
 # Deployment
 The project can be temporarily deployed by using ngrok. To do so, run the following command in the terminal:
 `ngrok http 8000`
+
+Drive link:
+https://drive.google.com/drive/folders/17npMQ3NCsr9rKHrdKSriSMQHBSucil73?usp=sharing
