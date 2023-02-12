@@ -148,4 +148,3 @@ def index(state, district):
     predict_data = [[N, P, K, temperature, humidity, ph, rainfall]]
     return str(getList(predict_data))
     
-print(main('Tamil Nadu', 'Coimbatore'))
