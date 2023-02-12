@@ -1,0 +1,125 @@
+﻿{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Crop Prediction - The more way to get productive</title>
+  </head>
+  <body background="{% static 'crop_prediction/' %}images/Backg.jpg">
+	<div class="container mb-5">
+		<div class="container mb-5" style="height: 100px; width:auto;font-size:100px;color:aliceblue;">
+			<center><h1 style="font-size: larger;">Crop Prediction</h1></center>
+			<div class="row justify-content-between">
+				<div class="col-4">
+
+				</div>
+
+				<div class="col-4" style="font-size: 20px;">
+					<p>The easy way to predict the crops.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="container ma-5" style="margin: 0 auto;width:500px; padding-top:100px">
+		<div class="card">
+			<h5 class="card-header">Crop prediction login</h5>
+			<div class="card-body">
+			  <form class="form was-validated ma-3" action={% url 'login' %} method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="user_mail_id">Email address</label>
+					<input type="email" class="form-control" id="user_mail_id" name="user_mail_id" placeholder="Enter your email address" aria-describedby="email_id_help" required>
+					<small id="email_id_help" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					<div class="valid-feedback">Looks good!</div>
+              		<div class="invalid-feedback">Enter mail id</div>
+				  </div>
+
+
+				  <div class="form-group">
+					<label for="user_password">Password</label>
+					<input type="password" class="form-control" id="user_password" id="user_password" name="user_password" pattern="(?=.*\W)(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,24}" placeholder="Enter your password" required>
+					<div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Enter your new password,Must contain at least special character and one number and one uppercase and lowercase letter, and at least 10 or more characters</div>
+				  </div>
+				  <div class="form-group">
+					<label class="form-check-label" for="terms">Forgot password?</label>
+				  </div>
+				  <div class="row justify-content-between">
+					<div class="col-4">
+						<button style="margin: 0 auto;width:100px;min-width:50px;" type="button" class="btn btn-primary">Register</button>
+					</div>
+			
+					<div class="col-4">
+						<button style="margin: 0 auto;width:100px;min-width:50px" type="submit" class="btn btn-primary">Login</button>
+					</div>
+					
+				  </div>
+				  
+			  </form>
+			</div>
+		  </div>
+	</div>
+
+	<!-- Modal -->
+<div class="modal fade" id="staff_change_password" data-backdrop="static" tabindex="-1" role="dialog"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+	<div class="modal-header">
+	  <h5 class="modal-title" id="staticBackdropLabel">Change password for the first time</h5>
+	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+	  <form class="form was-validated" action={% url 'change_password' %} method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+		  <label for="staff_mail_id" class="for">Enter mail id</label>
+		  <input type="email" class="form-control mb-3" Name="staff_mail_id" required>
+		  <div class="valid-feedback">Looks good!</div>
+		  <div class="invalid-feedback">Enter mail id</div>
+		</div>
+		<div class="mb-3">
+		  <label for="old_password" class="for">Enter old password</label>
+		  <input maxlength="5" type="password" class="form-control mb-3" Name="old_password" required>
+		  <div class="valid-feedback">Looks good!</div>
+		  <div class="invalid-feedback">Enter your old password provided by admin</div>
+		</div>
+		<div class="mb-3">
+		  <label for="new_password" class="form-label">Enter new password</label>
+		  <input pattern="(?=.*\W)(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,24}" type="password" class="form-control" Name="new_password" id="new_password" onkeyup="check()" required>
+		  <div class="valid-feedback">Looks good!</div>
+		  <div class="invalid-feedback">Enter your new password,Must contain at least special character and one number and one uppercase and lowercase letter, and at least 10 or more characters</div>
+		</div>
+		<div class="mb-3">
+		  <label for="confirm_new_password" class="form-label">Confirm new pasasword</label>
+		  <input pattern="(?=.*\W)(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,24}" type="password" class="form-control" Name="confirm_new_password" id="confirm_new_password" onkeyup="check()" required>
+		  <div class="valid-feedback" id="feedback_report">Looks good!</div>
+		  <div class="invalid-feedback">Enter your new password again,Must contain at least one special character and one number and one uppercase and lowercase letter, and at least 10 or more characters</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+	  <input type="hidden" id="mail_id" name="mail_id" value={{mailid}}>
+	  <button type="submit" id="change_password_btn" class="btn btn-warning">Change password</button>
+	  </form>
+	</div>
+  </div>
+</div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+﻿{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Crop Prediction - The more way to get productive</title>
+  </head>
+  <body background="{% static 'crop_prediction/' %}images/Backg.jpg" style="background-attachment: fixed">
+
+	<div class="container mb-5">
+		<div class="container mb-5" style="height: 100px; width:auto;font-size:100px;color:aliceblue;">
+			<center><h1 style="font-size: larger;">Crop Prediction</h1></center>
+			<div class="row justify-content-between">
+				<div class="col-4">
+
+				</div>
+				<div class="col-4" style="font-size: 20px;">
+					<p>The easy way to predict the crops.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+
+	<div class="container ma-5" style="margin: 0 auto;width:500px; padding-top:100px">
+		<div class="card">
+			<h5 class="card-header">Crop prediction - search</h5>
+			<div class="card-body">
+				<p style="color:black;">{{mailid}}</p>
+			  <form class="form was-validated ma-3" action={% url 'crop_predict' %} method="POST">
+				{% csrf_token %}
+				<input type="hidden" id="user_mail_id" name="user_mail_id" value="{{mailid}}">
+				<div class="form-group">
+					<label for="user_mail_id">Enter State</label>
+					<input type="text" class="form-control" id="search_state" name="search_state" placeholder="Enter your state" required>
+					<div class="valid-feedback">Looks good!</div>
+					  <div class="invalid-feedback">Enter your state</div>
+				  </div>
+				  <div class="form-group">
+					<label for="user_password">Enter district</label>
+					<input type="text" class="form-control" id="search_district" name="search_district" placeholder="Enter your district" required>
+					<div class="valid-feedback">Looks good!</div>
+			  <div class="invalid-feedback">Enter your district</div>
+				  </div>
+				  <div class="row justify-content-between">
+					<div class="col-4">
+						
+					</div>
+			
+					<div class="col-4">
+						<button style="margin: 0 auto;width:100px;min-width:50px" type="submit" class="btn btn-success">search</button>
+					</div>
+					
+				  </div>
+				  
+			  </form>
+			</div>
+		  </div>
+	</div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
